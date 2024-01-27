@@ -1,0 +1,32 @@
+<% layout('layouts/boilerplate') %>
+<h1 class="mb-4">Your Favourites!</h1>
+<div class="mb-3">
+<a class="btn btn-sm btn-success" href="/account">Go Back</a>
+</div>
+<div class="row">
+    <% if(myUser.favourites.length) {%>
+    <% for(let c of myUser.favourites) {%>
+            <div class="card mb-1">
+                <div class="row">
+                    <div class="col-md-4 ">
+                        <img class="img-fluid" src="<%=c.image[0].url%>" alt="">
+                    </div>
+                    <div class="col-md-8">
+                        <h5 class="card-title mt-3"><%=c.title%></h5>
+                        <p class="card-text"><%=c.description%></p>
+                        <p>
+                            <small class="text-muted"><%=c.location%></small>
+                        </p>
+                        <a class="btn btn-primary" href="/campgrounds/<%=c._id%>">View <%=c.title%></a>
+                    </div>
+                </div>
+            </div>
+        <% } %>
+</div>
+<% } else{%>
+    <p class="lead">You haven't Added to your favourites yet. Start adding to your Favourites.</p>
+        <div><a class="btn btn-sm btn-primary mt-4" href="/campgrounds">Surf Campgrounds</a>
+        </div>
+    <% } %>
+
+

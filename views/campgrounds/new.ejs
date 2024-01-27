@@ -1,0 +1,37 @@
+<% layout('layouts/boilerplate') %>
+    <h1 class="text-center mt-5">Add a New Campground</h1>
+    <div class="container-fluid mt-5">
+    <form action="http://localhost:3000/campgrounds/new" method="post" enctype="multipart/form-data">
+        <div class="mb-4">
+            <label for="title" class="form-label">Title</label>
+            <div class="input-group">
+                <input type="text" class="form-control" id="title" placeholder="Username" name="campground[title]" aria-label="Username" aria-describedby="basic-addon1">
+              </div>
+        </div>
+        <div class="mb-4">
+            <label for="location" class="form-label">Location</label>
+            <div class="location">
+                <input type="text" class="form-control" id="location" placeholder="Include Main Cities" name="campground[location]" aria-label="Username" aria-describedby="basic-addon1">
+              </div>
+        </div>
+        <div class="mb-4">
+            <label class="form-label" for="desc">Description</label>
+            <input class="form-control" type="text" name="campground[description]" id="desc" placeholder="Description">
+        </div>
+            <div class="mb-4">
+                <label for="image" class="form-label">Add Image(s)...</label>
+                <input class="form-control" type="file" id="image" name="image" multiple>
+              </div>
+        <div class="input-group mb-3">
+            <span class="input-group-text">$</span>
+            <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)" name="campground[price]">
+            <span class="input-group-text">.00</span>
+          </div>
+    <button class="btn btn-primary mt-2">Add campGround</button>
+    </form>
+</div>
+    <footer>
+        <div class="mt-5">
+    <a class="mt-5 mx-2" href="/campgrounds"><b>All Campgrounds</b></a>
+</div>
+</footer>

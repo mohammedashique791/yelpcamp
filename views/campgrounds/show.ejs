@@ -1,0 +1,167 @@
+<% layout('layouts/boilerplate') %>
+<link rel="stylesheet" href="/stylesheet/stars.css">
+<link href="https://api.mapbox.com/mapbox-gl-js/v3.1.0/mapbox-gl.css" rel="stylesheet">
+<script src="https://api.mapbox.com/mapbox-gl-js/v3.1.0/mapbox-gl.js"></script>
+<div class="row mb-5">
+    <div class="col-6">
+<div class="card" style="width: 40rem;">
+    <% if(result.image) {%>
+        <div>
+            <div id="carouselExample" class="carousel slide">
+                <div class="carousel-inner">
+                    <% result.image.forEach((img, i)=> {%>
+                  <div class="carousel-item <%=i === 0 ? 'active' : ''%>">
+                    <img crossorigin="anonymous" src="<%=img.url%>" class="d-block w-100" alt="...">
+                  </div>
+                <% }) %>
+            </div>
+            <% if(result.image.length > 1) {%>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Next</span>
+                </button>
+                <% } %>
+              </div>
+    </div>
+   
+    <% } %>
+    <div class="card-body">
+      <h3 class="card-title"><%=result.title%></h3>
+        <hr>
+        <h5>submitted by: <a href=""><%=result.author.username%></a></h5>
+        <hr>
+        <h5 class="card-title">Location: <%=result.location%></h3>
+      <p class="card-text"><%=result.description%></p>
+      <hr>
+      <% if(result.price) {%>
+        <h6 class="mb-3">$<%=result.price%>/night</h6>
+        <% } %>
+        <form action="http://localhost:3000/favourites/<%=result._id%>" method="post">
+        <% if(fonzzi) {%> 
+          <% let found = false %>
+            <% if(!myUser.favourites.length) {%>
+              <div class="form-check form-switch mb-4">
+                <label class="form-check-label" for="flexSwitchCheckChecked"><b>Add To Favourites</b></label>
+                <input class="form-check-input" type="checkbox" name="favourites" role="switch" id="flexSwitchCheckChecked" checked>
+              </div>
+
+              <button class="btn btn-sm btn-info mb-4">Add!</button>
+                <% } else {%>
+          <% for(let c of myUser.favourites) {%>
+            <% if(c.title === result.title) {%>
+              <% found = true %>
+              <div class="form-check form-switch mb-4">
+              <label class="form-check-label" for="flexSwitchCheckChecked"><b>Remove from Favourites</b></label>
+              <input class="form-check-input" type="checkbox" name="favourites" role="switch" id="flexSwitchCheckChecked">
+            </div>
+              <button class="btn btn-sm btn-info mb-4">Remove!</button>
+          
+              <% break %>
+              <% } %>
+            <% } %>
+           <%if(!found){%>
+            <div class="form-check form-switch mb-4">
+            <label class="form-check-label" for="flexSwitchCheckChecked"><b>Add To Favourites</b></label>
+            <input class="form-check-input" type="checkbox" name="favourites" role="switch" id="flexSwitchCheckChecked" checked>
+           </div>
+          <button class="btn btn-sm btn-info mb-4">Add!</button>
+        <%}%>
+        <%}%>
+        <% } %>
+        </form>
+      <a href="/campgrounds" class="btn btn-sm btn-primary">Go Back</a>
+      <hr>
+        <form method="post" action="http://localhost:3000/campgrounds/delete/<%=result._id%>?_method=delete">
+            <form method="post" action="/campgrounds/delete/<%=result._id%>?_method=delete">
+                <% if(fonzzi && fonzzi.username == result.author.username) {%>
+                <div class="form-inline mb-4">
+                  <a href="/campgrounds/edit/<%=result._id%>" class="btn btn-sm btn-info">Edit campground</a>
+                  <button class="btn btn-sm btn-danger mx-2">Delete Campground</button>
+                </div>
+                <% } else if(!fonzzi){%>
+                    <div class="mb-4">
+                    <p class="small"><b>Login to view more exciting features!!</b></p>
+                    <a class="btn btn-sm btn-primary" href="/login">Login Now!</a>
+                </div>
+              
+                    <% } %>
+              </form>
+   </div>
+</div>
+</div>
+<div class="col-6 mt-3">
+  <div class="mb-3" id="map" style="width: 620px; height: 300px;"></div>
+    <form action="http://localhost:3000/campground/review/new/<%=result._id%>" method="post">
+        <div class="mb-3">
+            <label class="form-label" for="rating"></label>
+            <fieldset class="starability-growRotate">
+                <legend>Rate this!</legend>
+                <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="1" checked/>
+                <input type="radio" id="first-rate1" name="review[rating]" value="1" />
+                <label for="first-rate1" title="Terrible">1 star</label>
+                <input type="radio" id="first-rate2" name="review[rating]" value="2" />
+                <label for="first-rate2" title="Not good">2 stars</label>
+                <input type="radio" id="first-rate3" name="review[rating]" value="3" />
+                <label for="first-rate3" title="Average">3 stars</label>
+                <input type="radio" id="first-rate4" name="review[rating]" value="4" />
+                <label for="first-rate4" title="Very good">4 stars</label>
+                <input type="radio" id="first-rate5" name="review[rating]" value="5" />
+                <label for="first-rate5" title="Amazing">5 stars</label>
+              </fieldset>
+        </div>
+    <div class="mb-3">
+        <label class="form-label" for="body">Review</label>
+        <% if(!fonzzi) {%>
+            <label class="form-label" for="body">Review</label>
+            <textarea class="form-control" id="body" cols="10" rows="3" placeholder="Login to write a Review." disabled></textarea>
+            <% } else {%>
+        <textarea class="form-control" name="review[body]" id="body" cols="10" rows="3"></textarea>
+                <% } %>
+    </div>
+    <% if(fonzzi) {%>
+    <button class="btn btn-warning mb-5">Submit</button>
+    <% } %>
+    </form>
+    <% if(result.review.length)  {%>
+<% for(let c of result.review) {%>
+    <div class="card mb-3">
+        <div class="card-body">
+            <h5 class="card-title"><%=c.body%></h5>
+            <p class="starability-result" data-rating="<%=c.rating%>">
+              Rated: <%=c.rating%>
+            </p>
+    <h6 class="card-subtitle mb-2 text-body-secondary"><%=c.author.username%></h6>
+    <% if(fonzzi && fonzzi.username === c.author.username) {%>
+    <form action="http://localhost:3000/campground/<%=result._id%>/review/<%=c._id%>?_method=delete" method="post">
+        <div class="form-inline mb-4 mt-4">
+        <button class="btn btn-sm btn-danger">Delete</button>
+        </div>
+        </form>
+        <% } %>
+    <% } %>
+
+<% } %>
+<% if(result.review.length <=0) { %>
+    <div class="card">
+        <div class="card-body">
+    <p>No Reviews Yet. Be the First One to Comment!</p>
+    <% } %>
+</div>
+</div>
+
+<script>
+  const results = <%-JSON.stringify(result)%>;
+</script>
+
+<script src="/javascript/mapbox.js"></script>
+
+        
+      
+
+
+
+    

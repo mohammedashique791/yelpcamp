@@ -1,0 +1,18 @@
+.firstText {
+    color: #E42B50;
+}
+
+.nav-link {
+    border-bottom: 2px solid transparent;
+    transition: 0.3s;
+}
+
+.nav-link:hover {
+    color: #ABEBC6  ;
+    transform: translateY(-0.35em);
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+.cover-container {
+    max-width: 60vw;
+}

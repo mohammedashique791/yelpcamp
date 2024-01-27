@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YelpCamp</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="/stylesheet/homecss.css">
+</head>
+<body class="d-flex flex-column vh-100">
+    <%- include('./partials/flash') %>
+    <div class="cover-container">
+    <nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container-fluid">
+                <a class="navbar-brand" href=""> <img src="/svg/yelp.svg" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
+                </a>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                      <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/campgrounds/home">Home</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="/campgrounds/new">Add Campground</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="/campgrounds">All Campgrounds</a>
+                      </li>
+                    </ul>
+                  </div>
+                <div class="ml-auto navbar-nav">
+                    <% if(!fonzzi) {%>
+                        <a class="nav nav-link" href="/login">Login</a>
+                        <a class="nav nav-link" href="/register">Register</a>
+                        <% }  else{%>
+                            <a class="nav nav-link" href="/account"><img src="/svg/avatar.svg" alt=""><%=fonzzi.username%></a>
+                            <a class="nav nav-link" href="/logout">LogOut</a>
+                            <% } %>
+                        </div>
+    </div>
+</nav>
+</div>
+<img class="img-fluid cover" style="width:100%; height:1000px;" src="/images/newcamp.jpg" alt="fgd">
+<div class="mt-5"></div>
+<div class="container mt-5 mb-5">
+    <div><h1 class="firstText text-center mt-2 mb-4">Explore Various Campgrounds</h1></div>
+    <p class="lead-text text-center">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Modi, totam dolorem voluptate molestiae cumque itaque ratione atque quidem debitis ab facere. Beatae, aut voluptatibus dolorum a harum cumque quam quibusdam.
+    Quam, dolorem cupiditate. Dolore aliquam modi sapiente eligendi, et non exercitationem omnis eius libero, esse architecto voluptate dolorum molestias debitis ipsam. Ratione ipsam suscipit, sit vel quod explicabo dolor minima?
+    Beatae veniam deleniti obcaecati, mollitia quam impedit architecto ea doloribus possimus expedita. Atque voluptates eligendi deleniti odio saepe magni, optio neque veritatis excepturi ipsam provident dolorem quasi veniam praesentium tempora?
+    Consequatur, aut. Voluptas soluta dolor voluptatem magni accusantium, quasi pariatur ipsam, vero quia tempore numquam quam harum incidunt laborum cum suscipit facere cupiditate minus quas earum, iure tempora! Maiores, excepturi.
+    Tempora, asperiores architecto dolor explicabo illo doloremque doloribus modi ea sit sunt culpa quisquam atque. Odit voluptatibus facilis odio voluptatum, obcaecati aliquid omnis quis nesciunt? Explicabo ad consectetur libero adipisci?</p>
+</div>
+<div class="mb-5"></div>
+<section class="mb-5">
+<div class="row">
+    <div class="col-8 offest-2" style="width:50%; height: 500px;">
+    <div id="carouselExampleCaptions" class="carousel slide">
+        <div class="carousel-indicators">
+          <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+          <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+          <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="/images/camp-2.jpg" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-none d-md-block">
+              <h5>First slide label</h5>
+              <p>Explore the exuberance of camp Availability across the World!!!.</p>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <img src="/images/newcamp.jpg" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-none d-md-block">
+              <h5>Second slide label</h5>
+              <p>Add and Earn per booking!</p>
+            </div>
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+    </div>
+    <div class="col-6 d-flex align-items-center ml-5">
+        <div><h2 class="text-center" style="color: #003399;">Incredible</h2>
+            <p class="lead-text text-center mt-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure animi soluta ad placeat qui! Fuga facere aliquid quibuiat facilis repellendus reiciendis iure eveniet?
+                <div class="d-flex justify-content-center"><a class="btn btn-sm btn-primary" href="/campgrounds">Surf Through Campgrounds!!</a></div>
+            </p>
+    </div>
+</div>
+</section>
+<div class="mt-5"></div>
+<div class="mt-5"></div>
+<div class="mt-5"></div>
+<section class="mt-5" style="background-color: #85C1E9;">
+<div class="row mt-5">
+    <div class="col-4 mt-5 mx-3">
+        <h2 class="text-center">Add your Campground!!</h2>
+        <p class="lead-text text-center">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed, ex harum accusamus illo unde quibusdam fugiat doloribus obcaecati exercitationem aperiam praesentium deleniti tenetur? Magnam voluptate commodi perspiciatis, beatae a sapiente.
+        Esse auerspiciatis porro ducimus, adipisci, voluptates dignissimos enim cum hic suscipit! Sint nihil error ad quo velit doloribus eaque recusandae blanditiis. Quibusdam beatae incidunt soluta?
+        <div class="d-flex justify-content-center"><a class="btn btn-sm btn-success" href="/campgrounds/new">Add Camground!!!</a></div>
+    </p>
+    </div>
+    <div class="col-1"></div>
+    <div class="col-6 mt-5">
+        <img class="img-fluid" src="/images/Screenshot (376).png" alt="">
+    </div>
+</div>
+</section>
+<div class="mt-5"></div>
+<footer class="mt-auto d-flex justify-content-center">&#169;2024 YelpCamp</footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+</body>
+</html>

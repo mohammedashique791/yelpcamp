@@ -1,0 +1,17 @@
+<% layout('layouts/boilerplate') %>
+<h1>Edit your Review</h1>
+<form action="http://localhost:3000/campground/<%=id%>/<%=mandan._id%>/reviewedited" method="post">
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title"><input type="text" placeholder="New Comment" name="review[body]"></h5>
+          <h6 class="card-subtitle mb-2 text-body-secondary mt-2"><%=mandan.author.username%></h6>
+          <p class="card-text">Old comment: <b><%=mandan.body%></b></p>
+          <div class="mb-3">
+          <a href="/campgrounds/<%=id%>" class="btn btn-sm btn-primary">Go Back to Show Page</a>
+          <button class="btn btn-sm btn-warning" >Edit</button>
+        </div>
+        </div>
+      </div>
+</form>
+
+/:id/review/:revID/edit
