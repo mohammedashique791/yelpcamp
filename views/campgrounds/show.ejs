@@ -40,7 +40,7 @@
       <% if(result.price) {%>
         <h6 class="mb-3">$<%=result.price%>/night</h6>
         <% } %>
-        <form action="http://localhost:3000/favourites/<%=result._id%>" method="post">
+        <form action="/favourites/<%=result._id%>" method="post">
         <% if(fonzzi) {%> 
           <% let found = false %>
             <% if(!myUser.favourites.length) {%>
@@ -75,7 +75,7 @@
         </form>
       <a href="/campgrounds" class="btn btn-sm btn-primary">Go Back</a>
       <hr>
-        <form method="post" action="http://localhost:3000/campgrounds/delete/<%=result._id%>?_method=delete">
+        <form method="post" action="/campgrounds/delete/<%=result._id%>?_method=delete">
             <form method="post" action="/campgrounds/delete/<%=result._id%>?_method=delete">
                 <% if(fonzzi && fonzzi.username == result.author.username) {%>
                 <div class="form-inline mb-4">
@@ -95,7 +95,7 @@
 </div>
 <div class="col-6 mt-3">
   <div class="mb-3" id="map" style="width: 620px; height: 300px;"></div>
-    <form action="http://localhost:3000/campground/review/new/<%=result._id%>" method="post">
+    <form action="/campground/review/new/<%=result._id%>" method="post">
         <div class="mb-3">
             <label class="form-label" for="rating"></label>
             <fieldset class="starability-growRotate">
@@ -136,7 +136,7 @@
             </p>
     <h6 class="card-subtitle mb-2 text-body-secondary"><%=c.author.username%></h6>
     <% if(fonzzi && fonzzi.username === c.author.username) {%>
-    <form action="http://localhost:3000/campground/<%=result._id%>/review/<%=c._id%>?_method=delete" method="post">
+    <form action="/campground/<%=result._id%>/review/<%=c._id%>?_method=delete" method="post">
         <div class="form-inline mb-4 mt-4">
         <button class="btn btn-sm btn-danger">Delete</button>
         </div>

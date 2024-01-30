@@ -1,7 +1,7 @@
 <% layout('layouts/boilerplate') %>
 <h1 class="text-center mt-5">Edit Campground</h1>
 <div class="container-fluid mt-5">
-    <form  method="POST" action="http://localhost:3000/campgrounds/edit/<%=first%>?_method=patch" enctype="multipart/form-data">
+    <form  method="POST" action="/campgrounds/edit/<%=first%>?_method=patch" enctype="multipart/form-data">
         <div class="mb-4">
             <label for="title" class="form-label">Title</label>
             <div class="input-group">

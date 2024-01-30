@@ -1,6 +1,6 @@
 <% layout('layouts/boilerplate') %>
 <h1>Edit your Review</h1>
-<form action="http://localhost:3000/campground/<%=id%>/<%=mandan._id%>/reviewedited" method="post">
+<form action="/campground/<%=id%>/<%=mandan._id%>/reviewedited" method="post">
     <div class="card" style="width: 18rem;">
         <div class="card-body">
           <h5 class="card-title"><input type="text" placeholder="New Comment" name="review[body]"></h5>
