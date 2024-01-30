@@ -21,7 +21,7 @@ const helmet = require('helmet');
 const userRoute = require('./routes/user');
 const {storeReturnTo} = require('./storeprogress.js');
 const databaseUrl = process.env.DB_URL;
-const secret = process.env.secret;
+const secret = process.env.SECRET;
 const port = process.env.PORT || 4000;
 mongoose.connect(databaseUrl || 'mongodb://127.0.0.1:27017/yelpCamp')
 .then(()=>{
@@ -40,7 +40,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 const store = MongoStore.create({
-    mongoUrl: 'mongodb://127.0.0.1:27017/yelpCamp',
+    mongoUrl: databaseUrl,
     touchAfter: 24 * 60 * 60,
     crypto: {
         secret: secret
