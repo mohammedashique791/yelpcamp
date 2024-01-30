@@ -21,7 +21,7 @@ const helmet = require('helmet');
 const userRoute = require('./routes/user');
 const {storeReturnTo} = require('./storeprogress.js');
 const databaseUrl = process.env.DB_URL;
-const secret = process.env.SECRET;
+const secret = process.env.SECRET || 'fonzziistheking791222';
 const port = process.env.PORT || 3000;
 mongoose.connect(databaseUrl)
 .then(()=>{
