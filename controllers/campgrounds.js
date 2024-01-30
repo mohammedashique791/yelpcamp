@@ -7,7 +7,7 @@ const User = require('../models/user');
 
 module.exports.index = async(req, res)=>{
     const fonozzi = await campGround.find({});
-    res.render('campgrounds/index', {fonozzi});
+    return res.render('campgrounds/index', {fonozzi});
 };
 
 module.exports.detailshow = async(req, res)=>{
