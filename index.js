@@ -49,7 +49,8 @@ const store = MongoStore.create({
 
 const sessionConfig = {
     store,
-    secret,
+    name: 'session',
+    secret: secret,
     resave: false, 
     saveUninitialized: true,
     cookie: {
@@ -82,12 +83,6 @@ app.use('/campground', reviewRoute);
 app.use('/', userRoute);
 
 
-const wrapAsync = function(fn){
-    return ((req, res, next)=>{
-        fn(req, res, next).catch(err=> next(err));
-    })
-}
-
 
 app.all('*', (req, res, next)=>{
     next(new AppError('Invalid Page', 404))
@@ -95,9 +90,12 @@ app.all('*', (req, res, next)=>{
 
 
 app.use((err, req, res, next)=>{
-    const {statusCode = 500, message = 'Oh No Error'} = err;
+    const {statusCode = 500} = err;
+    if(!err.message){
+        err.message = 'Something Went Wrong'
+    }
     req.flash('error', err.message);
-    res.redirect('/campgrounds');
+    return res.status(statusCode).render('/campgrounds');
 })
 app.listen(port, ()=>{
     console.log("Serving on PORT 3000");
