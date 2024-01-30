@@ -95,7 +95,7 @@ app.use((err, req, res, next)=>{
         err.message = 'Something Went Wrong'
     }
     req.flash('error', err.message);
-    return res.status(statusCode).render('/campgrounds');
+    return res.render('/campgrounds');
 })
 app.listen(port, ()=>{
     console.log("Serving on PORT 3000");
