@@ -23,10 +23,10 @@ module.exports.detailshow = async(req, res)=>{
     }
     if(req.user){
     const myUser = await User.findById(req.user._id).populate('favourites');
-    res.render('campgrounds/show', {result, myUser});
+    return res.render('campgrounds/show', {result, myUser});
     }
     else{
-        res.render('campgrounds/show', {result});
+        return res.render('campgrounds/show', {result});
     }
 }
 
@@ -46,7 +46,7 @@ module.exports.newcampground = async(req, res)=>{
     pushpa.author = req.user._id;
     await pushpa.save();
     req.flash('success', 'Successfully Created a Campground');
-    res.redirect('/campgrounds');
+    return res.redirect('/campgrounds');
 }
 
 module.exports.editCamp = async(req, res)=>{
@@ -62,14 +62,14 @@ module.exports.editCamp = async(req, res)=>{
         await target.updateOne({$pull: {image: {filename: {$in: req.body.deleteImages}}}});
     }
     req.flash('success', 'Successfully Updated Campground!');
-    res.redirect(`/campgrounds/${id}`);
+    return res.redirect(`/campgrounds/${id}`);
 }
 
 module.exports.deleteCamp = async(req, res)=>{
     const {id} = req.params;
     await campGround.findByIdAndDelete(id);
     req.flash('success', 'Successfully Deleted Campground!');
-    res.redirect('/campgrounds');
+    return res.redirect('/campgrounds');
 }
 
 module.exports.editcampform = async(req, res)=>{
@@ -79,5 +79,5 @@ module.exports.editcampform = async(req, res)=>{
         req.flash('error', 'Cannot find the campground');
         return res.redirect('/campgrounds');
     }
-    res.render('campgrounds/edit', {first, data});
+    return res.render('campgrounds/edit', {first, data});
 }

@@ -1,7 +1,7 @@
 const User = require('../models/user');
 const campGround = require('../models/campground');
 module.exports.renderRegister = (req, res)=>{
-    res.render('users/register');
+    return res.render('users/register');
 }
 
 module.exports.register = async(req, res, next)=>{
@@ -14,12 +14,12 @@ module.exports.register = async(req, res, next)=>{
             next(err)
         }
         req.flash('success', 'Welcome Home');
-    res.redirect('/campgrounds');
+    return res.redirect('/campgrounds');
     })  
     }
     catch(e){
         req.flash('error', e.message);
-        res.redirect('/register');
+        return res.redirect('/register');
     }
 }
 
@@ -29,30 +29,30 @@ module.exports.logout = (req, res, next)=>{
             return next(err);
         }
         req.flash('success', 'Good Bye!');
-        res.redirect('/campgrounds');
+        return res.redirect('/campgrounds');
     });
     
 }
 
 module.exports.myaccount = async(req, res, next)=>{
     const fonozzi = await campGround.find({}).populate('author');
-    res.render('users/account' ,{fonozzi});
+    return res.render('users/account' ,{fonozzi});
 }
 
 module.exports.login = (req, res)=>{
     req.flash('success', `Welcome Back ${req.user.username}`);
     const redirectUrl = res.locals.returnTo || '/campgrounds';
-    res.redirect(redirectUrl);
+    return res.redirect(redirectUrl);
 }
 
 module.exports.renderlogin = (req, res)=>{
-    res.render('users/login');
+    return res.render('users/login');
 }
 
 module.exports.renderFavPage = async(req, res)=>{
     if(req.user){
     const myUser = await User.findById(req.user._id).populate('favourites');
-    res.render('users/favourite', {myUser});
+    return res.render('users/favourite', {myUser});
     }
 }
 
@@ -75,7 +75,7 @@ module.exports.favourites = async(req, res, next)=>{
             result.favourites.push(kali);
             result.save();
             req.flash('success', 'Successfully Added to Favourites');
-        res.redirect(`/campgrounds/${kali}`); 
+        return res.redirect(`/campgrounds/${kali}`); 
         }
 }
 } 
@@ -84,12 +84,12 @@ else{
     const sumu = req.params.id;
     await User.findByIdAndUpdate(req.user._id, {$pull: {favourites: sumu}});
     req.flash('success', 'Successfully removed from Favourites!');
-    res.redirect(`/campgrounds/${sumu}`);
+    return res.redirect(`/campgrounds/${sumu}`);
     }
 }
 };
 
 
 module.exports.details = (req, res)=>{
-    res.render('users/about');
+    return res.render('users/about');
 }
