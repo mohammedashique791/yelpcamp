@@ -98,5 +98,5 @@ app.use((err, req, res, next)=>{
     return res.render('/campgrounds');
 })
 app.listen(port, ()=>{
-    console.log("Serving on PORT 3000");
+    console.log(`Serving on PORT ${port}`);
 })
