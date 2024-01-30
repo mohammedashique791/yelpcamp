@@ -23,7 +23,7 @@ const {storeReturnTo} = require('./storeprogress.js');
 const databaseUrl = process.env.DB_URL;
 const secret = process.env.SECRET;
 const port = process.env.PORT || 3000;
-mongoose.connect(databaseUrl || 'mongodb://127.0.0.1:27017/yelpCamp')
+mongoose.connect(databaseUrl)
 .then(()=>{
     console.log("Mongo Database Connected");
 })
