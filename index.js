@@ -21,7 +21,7 @@ const helmet = require('helmet');
 const userRoute = require('./routes/user');
 const {storeReturnTo} = require('./storeprogress.js');
 const databaseUrl = process.env.DB_URL;
-const secret = process.env.SECRET || 'fonzziistheking791222';
+const secret = process.env.SECRET || 'anteandimyraaaa';
 const port = process.env.PORT || 3000;
 mongoose.connect(databaseUrl)
 .then(()=>{
@@ -49,9 +49,9 @@ const store = MongoStore.create({
 
 const sessionConfig = {
     store,
-    name: 'session',
-    secret: secret,
+    name: 'mysession',
     resave: false, 
+    secret: secret,
     saveUninitialized: true,
     cookie: {
         httpOnly: true,
